@@ -11,10 +11,10 @@
 A Checkout UI shipping message / [delivery banner](https://shopify.dev/docs/api/checkout-ui-extensions/2025-04/targets/shipping/purchase-checkout-delivery-address-render-before) that displays based on the entered postal code or state/province
 
 * Create the schema (start minimally) 
- * Viewing it in the Admin
- * Adding values
-  * What happens when `dev` ends
-  * What happens when you `dev clean`
+  * Viewing it in the Admin
+  * Adding values
+    * What happens when `dev` ends
+    * What happens when you `dev clean`
 * Using metaobjects in a UI extension
   * Build incrementally / add the schema
   * Discuss validation rules; features; capabilities 
