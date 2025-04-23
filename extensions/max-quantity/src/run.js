@@ -18,32 +18,28 @@ export function run(input) {
   }
 
   const errors = input.cart.lines
-    .filter(({ quantity, merchandise }) => {
+    .flatMap(({ quantity, merchandise }) => {
       if (merchandise.__typename !== "ProductVariant") {
-        return false;
+        return [];
       }
       
       const maxQuantityValue = merchandise.product?.maxQuantity?.value;
       if (!maxQuantityValue) {
-        return false;
+        return [];
       }
 
-      return quantity > parseInt(maxQuantityValue);
-    })
-    .map(({ merchandise }) => {
-
-      let localizedMessage = "Not possible to order more than one of each";
-
-      if (merchandise.__typename == "ProductVariant") {
-        if (merchandise.product?.maxQuantityMessage?.value) {
-          localizedMessage = merchandise.product.maxQuantityMessage.value;
-        }
+      if (quantity <= parseInt(maxQuantityValue)) {
+        return [];
       }
 
-      return {
+      const localizedMessage = 
+        merchandise.product?.maxQuantityMessage?.value ??
+        "Not possible to order more than one of each";
+
+      return [{
         localizedMessage,
         target: "$.cart",
-      }
+      }];
     });
 
   return {
