@@ -14,7 +14,40 @@ api_version = "2025-07"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = ""
+scopes = "write_products,write_customers,write_metaobject_definitions"
 
 [auth]
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+
+[metaobjects.app.shipping_messages]
+access.admin = "merchant_read_write"
+name = "Shipping Messages"
+display_name_field = "state_province"
+
+[metaobjects.app.shipping_messages.fields]
+start_time = "date_time"
+end_time = "date_time"
+
+[metaobjects.app.shipping_messages.fields.state_province]
+type = "single_line_text_field"
+validations.choices = ["Ottawa", "Quebec", "Alberta"]
+required = true
+name = "State/Province"
+
+[metaobjects.app.shipping_messages.fields.message]
+type = "rich_text_field"
+required = true
+
+[product.metafields.app.max_purchase_quantity]
+type = "number_integer"
+validations.min = 0
+access.admin = "merchant_read_write"
+
+[product.metafields.app.max_quantity_message]
+type = "single_line_text_field"
+access.admin = "merchant_read_write"
+
+[customer.metafields.app.allow_purchase_over_max]
+type = "boolean"
+access.admin = "merchant_read_write"
+access.customer_account = "read"
