@@ -1,0 +1,27 @@
+query RunInput {
+  cart {
+    buyerIdentity {
+      customer {
+        allowPurchaseOverMax: metafield(namespace: "$app", key: "allow_purchase_over_max") {
+          value
+        }
+      }
+    }
+    lines {
+      quantity
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          product {
+            maxQuantity: metafield(namespace: "$app", key: "max_purchase_quantity") {
+              value
+            }
+            maxQuantityMessage: metafield(namespace: "$app", key: "max_quantity_message") {
+              value
+            }
+          }
+        }
+      }
+    }
+  }
+}

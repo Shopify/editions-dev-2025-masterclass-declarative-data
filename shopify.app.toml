@@ -13,7 +13,7 @@ api_version = "2025-07"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_metaobject_definitions,write_metaobjects,read_metaobject_definitions,unauthenticated_read_customers"
+scopes = "write_products,write_customers,write_metaobject_definitions,write_metaobjects,read_metaobject_definitions,unauthenticated_read_customers"
 
 [auth]
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
@@ -56,3 +56,20 @@ name = "Start Time"
 [metaobjects.app.shipping_messages.fields.end_time]
 type = "date_time"
 name = "End Time"
+
+[product.metafields.app.max_purchase_quantity]
+name = "Max Purchase Quantity"
+type = "number_integer"
+validations.min = 0
+access.admin = "merchant_read_write"
+
+[product.metafields.app.max_quantity_message]
+name = "Max Quantity Message"
+type = "single_line_text_field"
+access.admin = "merchant_read_write"
+
+[customer.metafields.app.allow_purchase_over_max]
+name = "Allow Purchase Over Max"
+type = "boolean"
+access.admin = "merchant_read_write"
+access.customer_account = "read"
