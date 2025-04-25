@@ -27,4 +27,3 @@
 3. Add optional start_time and end_time fields. Give them human readable names
 4. Add validation.choices to state_province
 5. Update code to work with start date and time
-6. BONUS
