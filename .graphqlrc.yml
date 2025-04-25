@@ -1,0 +1,4 @@
+projects:
+  max-quantity:
+    schema: extensions/max-quantity/schema.graphql
+    documents: extensions/max-quantity/**/*.graphql
