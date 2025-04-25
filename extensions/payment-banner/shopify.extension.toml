@@ -6,8 +6,8 @@
 api_version = "2025-04"
 
 [[extensions]]
-name = "delivery-banner"
-handle = "delivery-banner"
+name = "payment-banner"
+handle = "payment-banner"
 type = "ui_extension"
 uid = "cda56148-3ebe-41c9-bdf3-b03b95b4b746"
 
@@ -16,7 +16,7 @@ uid = "cda56148-3ebe-41c9-bdf3-b03b95b4b746"
 # https://shopify.dev/docs/api/checkout-ui-extensions/unstable/extension-targets-overview
 
 [[extensions.targeting]]
-target = "purchase.checkout.delivery-address.render-before"
+target = "purchase.checkout.payment-method-list.render-before"
 module = "./src/Checkout.jsx"
 export = "deliveryAddress"
 
