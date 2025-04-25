@@ -30,12 +30,21 @@ function App() {
       .then(({data, errors}) => setData(data))
       .catch(console.error);
   }, [query]);
+  console.log(data);
 
   // Create a mapping of province codes to messages
   const provinceMessages = data?.metaobjects?.nodes?.reduce((acc, node) => {
     const stateProvince = node.fields.find(field => field.key === 'state_province')?.value;
     const message = node.fields.find(field => field.key === 'message2')?.value;
-    if (stateProvince && message) {
+    const startTime = node.fields.find(field => field.key === 'start_time')?.value;
+    const endTime = node.fields.find(field => field.key === 'end_time')?.value;
+
+    // Check if current time is within start and end time
+    const currentTime = new Date().getTime();
+    const isWithinTimeRange = (!startTime || currentTime >= new Date(startTime).getTime()) &&
+                             (!endTime || currentTime <= new Date(endTime).getTime());
+
+    if (stateProvince && message && isWithinTimeRange) {
       acc[stateProvince] = message;
     }
     return acc;
