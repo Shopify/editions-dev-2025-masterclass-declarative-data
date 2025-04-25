@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     query(
       `query {
-        metaobjects(first: 10, type: "app--244769816577--shipping_messages") {
+        metaobjects(first: 10, type: "$app--shipping_messages") {
           nodes {
             id
             fields {

@@ -29,23 +29,11 @@ required = true
 
   [metaobjects.app.shipping_messages.fields.state_province.validations]
   choices = [
-  "ON",
-  "BC",
-  "AB",
-  "QC",
-  "NS",
-  "NB",
-  "MB",
-  "SK",
-  "PE",
-  "NL",
-  "YT",
-  "NT",
-  "NU"
-]
+    "ON","BC","AB","QC","NS","NB","MB","SK","PE","NL","YT","NT","NU","AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"
+  ]
 
-[metaobjects.app.shipping_messages.fields.message2]
-type = "single_line_text_field"
+[metaobjects.app.shipping_messages.fields.message]
+type = "rich_text_field"
 required = true
 name = "Message"
 
