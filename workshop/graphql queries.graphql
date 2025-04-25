@@ -1,0 +1,35 @@
+query getMetaobjectDefinitions {
+  metaobjectDefinitions(first: 10) {
+    nodes {
+      id
+    }
+  }
+}
+
+mutation createMetaobject {
+  metaobjectCreate(metaobject:{
+    type: "$app:shipping_messages",
+    fields: [
+      {
+        key: "state_province",
+        value: "ON"
+      },
+      {
+        key: "message",
+        value: "Why did the Ontario farmer win an award? Because he was outstanding in his field!"
+      }
+    ]
+  }) {
+    userErrors {
+      message
+    }
+    metaobject {
+    	id
+      type
+      fields {
+        key
+        value
+      }
+    }
+  }
+}
