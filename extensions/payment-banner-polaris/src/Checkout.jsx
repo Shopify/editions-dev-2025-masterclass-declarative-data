@@ -1,18 +1,16 @@
-import {useEffect, useState} from 'react';
-import {
-  reactExtension,
-  Banner,
-  useSelectedPaymentOptions,
-  useApi
-} from "@shopify/ui-extensions-react/checkout";
+import {render} from "preact";
+import {useEffect, useState} from 'preact/hooks';
+import {useApi, useSelectedPaymentOptions} from "@shopify/ui-extensions/checkout/preact"
 
-const deliveryAddress = reactExtension("purchase.checkout.payment-method-list.render-before", () => <App />);
-export { deliveryAddress };
+// 1. Export the extension
+export default function() {
+  render(<Extension />, document.body)
+}
 
-function App() {
+function Extension() {
   const [data, setData] = useState();
   const {query} = useApi();
-
+  
   const paymentMethods = useSelectedPaymentOptions();
 
   useEffect(() => {
@@ -48,5 +46,5 @@ function App() {
     paymentMethods.findIndex(paymentMethod => message.payment_type === paymentMethod.type) !== -1
   );
 
-  return displayMessages?.map(message => <Banner title={message.message} key={message.id}></Banner>) || null;
+  return displayMessages?.map(message => <s-banner heading={message.message} id={message.id}></s-banner>) || null;
 }
