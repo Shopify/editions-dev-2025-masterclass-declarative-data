@@ -1,42 +1,53 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "500b61ad214df826c5cb3894db5cadff"
-organization_id = "149572536"
+client_id = "ba7c4e038a1c6e7c0a324901e140ef46"
 name = "masterclass-declarative-data"
+handle = "masterclass-declarative-data"
 application_url = "https://shopify.dev/apps/default-app-home"
-embedded = false
+embedded = true
 
 [build]
+include_config_on_deploy = true
 
 [webhooks]
-api_version = "2025-07"
+api_version = "2025-04"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products,write_customers,write_metaobject_definitions,write_metaobjects,read_metaobject_definitions,unauthenticated_read_customers"
+scopes = "read_metaobject_definitions,write_customers,write_metaobject_definitions,write_metaobjects,write_products"
 
 [auth]
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
 
-[metaobjects.app.payment_messages.access]
+[pos]
+embedded = false
+
+[metaobjects.app.shipping_messages.access]
 admin = "merchant_read_write"
 storefront = "public_read"
 
-[metaobjects.app.payment_messages.fields.payment_type]
-name = "Payment Type"
+[metaobjects.app.shipping_messages.fields.state_province]
+name = "Province Code"
 type = "single_line_text_field"
 required = true
 
-  # https://shopify.dev/docs/api/checkout-ui-extensions/2025-04/apis/payments
-  [metaobjects.app.payment_messages.fields.payment_type.validations]
+  [metaobjects.app.shipping_messages.fields.state_province.validations]
   choices = [
-    "creditCard", "deferred", "local", "manualPayment", "offsite", "other", "paymentOnDelivery", "redeemable", "wallet", "customOnsite"
+    "ON","BC","AB","QC","NS","NB","MB","SK","PE","NL","YT","NT","NU","AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"
   ]
 
-[metaobjects.app.payment_messages.fields.message]
+[metaobjects.app.shipping_messages.fields.message2]
 type = "single_line_text_field"
 required = true
 name = "Message"
+
+[metaobjects.app.shipping_messages.fields.start_time]
+type = "date_time"
+name = "Start Time"
+
+[metaobjects.app.shipping_messages.fields.end_time]
+type = "date_time"
+name = "End Time"
 
 [product.metafields.app.max_purchase_quantity]
 name = "Max Purchase Quantity"
@@ -54,3 +65,4 @@ name = "Allow Purchase Over Max"
 type = "boolean"
 access.admin = "merchant_read_write"
 access.customer_account = "read"
+

@@ -3,11 +3,11 @@
 
 # The version of APIs your extension will receive. Learn more:
 # https://shopify.dev/docs/api/usage/versioning
-api_version = "2025-04"
+api_version = "2025-07"
 
 [[extensions]]
-name = "delivery-banner"
-handle = "delivery-banner"
+name = "payment-banner"
+handle = "payment-banner"
 type = "ui_extension"
 uid = "cda56148-3ebe-41c9-bdf3-b03b95b4b746"
 
@@ -16,9 +16,8 @@ uid = "cda56148-3ebe-41c9-bdf3-b03b95b4b746"
 # https://shopify.dev/docs/api/checkout-ui-extensions/unstable/extension-targets-overview
 
 [[extensions.targeting]]
-target = "purchase.checkout.delivery-address.render-before"
 module = "./src/Checkout.jsx"
-export = "deliveryAddress"
+target = "purchase.checkout.payment-method-list.render-before"
 
 [extensions.capabilities]
 # Gives your extension access to directly query Shopify’s storefront API.
@@ -46,25 +45,8 @@ api_access = true
 # https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#settings-definition
 
 # [extensions.settings]
-#   [[extensions.settings.fields]]
-#   key = "title"
-#   type = "single_line_text_field"
-#   name = "Banner title"
-#   description = "Enter a title for the banner."
-#   [[extensions.settings.fields]]
-#   key = "description"
-#   type = "single_line_text_field"
-#   name = "Banner description"
-#   description = "Enter a description for the banner."
-#   [[extensions.settings.fields]]
-#   key = "status"
-#   type = "single_line_text_field"
-#   name = "Banner status"
-#     [[extensions.settings.fields.validations]]
-#     name = "choices"
-#     value = "[\"info\", \"success\", \"warning\", \"critical\"]"
-#   [[extensions.settings.fields]]
-#   key = "collapsible"
-#   type = "boolean"
-#   name = "Show collapsible description."
-#   description = "Display controls to expand or collapse the banner description."
+# [[extensions.settings.fields]]
+# key = "banner_title"
+# type = "single_line_text_field"
+# name = "Banner title"
+# description = "Enter a title for the banner"
