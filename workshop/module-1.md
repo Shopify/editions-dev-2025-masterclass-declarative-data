@@ -70,10 +70,11 @@
 1. Run `POLARIS_UNIFIED=true shopify app generate extension`
    * Select `Checkout UI`
    * Give your extension a name
-2. Create a simple hardcoded banner
+1. Create a simple hardcoded banner
+   1. **PRE-EDITIONS:** Update the version of `@shopify/ui-extensions` to `0.0.0-snapshot-20250428194056` in `package.json`, and `npm install`
    1. Use `purchase.checkout.payment-method-list.render-before` as the target
      * Update this in `shopify.extension.toml`
-   2. Open the extension via Shopify CLI and the Developer Console (`p`).
+   1. Open the extension via Shopify CLI and the Developer Console (`p`).
       * Confirm the banner displays above the payment method list
 3. Update the code to fetch the metaobject you created via the Storefront API and use it as a banner message. Display the banner if the payment type is selected.
    * [Code](../extensions/payment-banner/src/Checkout.jsx)
