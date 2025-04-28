@@ -1,3 +1,5 @@
+# Module 1: Using declarative metaobject definitions
+
 ## Creating your first definition
 
 1. Run `shopify app dev`
@@ -30,7 +32,8 @@
       }
    }
    ```
-
+1. Add the `write_metaobjects` access scope
+   * **PRE-EDITIONS:** You might need to accept the scope.
 1. Add a metaobject via GraphiQL
 
    ```gql
@@ -64,7 +67,7 @@
    ```
 
 ## Use the metaobject to create a payment banner in Checkout
-1. Run `shopify app generate extension` (**PRE-EDITIONS:** `POLARIS_UNIFIED=true shopify app generate extension`)
+1. Run `POLARIS_UNIFIED=true shopify app generate extension`
    * Select `Checkout UI`
    * Give your extension a name
 2. Create a simple hardcoded banner
