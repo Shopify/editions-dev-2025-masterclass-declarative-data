@@ -3,7 +3,8 @@
 ## Creating your first definition
 
 1. Run `shopify app dev`
-1. Create a `metaobjects.app.payment_messages` metaobject definition. Fields:
+    * Select the store you just created
+1. Create a `metaobjects.app.payment_messages` metaobject definition in `shopify.app.toml`. Fields:
 
    ```toml
    [metaobjects.app.payment_messages.fields.payment_type]
@@ -20,21 +21,22 @@
 1. Check your terminal to see what's happened when we added these.
     * Notice error in the terminal. That's right - we now flag which scopes are missing!
 1. Add `write_metaobject_definitions` scope. Success!
-   * **PRE-EDITIONS:** You might need to accept the scope.
 1. Open GraphiQL from Shopify CLI (`g`), you can query your metaobject definitions here.
+   * TODO: Link to open GraphiQL
 
    ```gql
    query getMetaobjectDefinitions {
       metaobjectDefinitions(first: 10) {
          nodes {
+            name
             id
          }
       }
    }
    ```
 1. Add the `write_metaobjects` access scope
-   * **PRE-EDITIONS:** You might need to accept the scope.
 1. Add a metaobject via GraphiQL
+   * TODO: Link to open GraphiQL
 
    ```gql
    mutation createMetaobject {
@@ -65,16 +67,17 @@
       }
    }
    ```
+   1. TODO: Query the metaobject just created
 
 ## Use the metaobject to create a payment banner in Checkout
-1. Run `POLARIS_UNIFIED=true shopify app generate extension`
+1. In a separate terminal (keep `app dev` running), run `POLARIS_UNIFIED=true shopify app generate extension`
    * Select `Checkout UI`
    * Give your extension a name
 1. Create a simple hardcoded banner
-   1. **PRE-EDITIONS:** Update the version of `@shopify/ui-extensions` to `0.0.0-snapshot-20250428194056` in `package.json`, and `npm install`
    1. Use `purchase.checkout.payment-method-list.render-before` as the target
      * Update this in `shopify.extension.toml`
    1. Open the extension via Shopify CLI and the Developer Console (`p`).
+      * TODO: Instructions on store password
       * Confirm the banner displays above the payment method list
 3. Update the code to fetch the metaobject you created via the Storefront API and use it as a banner message. Display the banner if the payment type is selected.
    * [Code](../extensions/payment-banner/src/Checkout.jsx)

@@ -1,8 +1,9 @@
 # Module 0: Setup
 
-1. Create a dev store in the [Dev Dashboard](https://dev.shopify.com/dashboard), including demo data
+1. Create a dev store in the [Dev Dashboard](https://dev.shopify.com/dashboard)
+    * Plus shop including demo data
 1. Install the latest Shopify CLI if you don't have it
-  * `npm install -g @shopify/cli@latest`
-  * **PRE-EDITIONS:** As of this moment, you should use `3.78.1` explicitly (not `3.78.2`)
+    * `npm install -g @shopify/cli@latest`
 1. Create an app with `shopify app init`
-  * You should choose `Extension only` because it's faster
+    * You should choose `Extension only` because it's faster
+    * Be sure to select your Dev Dash organization
