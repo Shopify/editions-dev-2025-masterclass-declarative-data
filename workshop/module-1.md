@@ -70,7 +70,20 @@
       }
    }
    ```
-   1. TODO: Query the metaobject just created
+   1. Query the metaobject you just created to confirm
+   ```
+   query {
+      metaobjects(first: 10, type: "$app:payment_messages") {
+         nodes {
+         id
+         fields {
+            key
+            value
+         }
+         }
+      }
+   }
+   ```
 
 ## Use the metaobject to create a payment banner in Checkout
 1. In a separate terminal (keep `app dev` running), run `POLARIS_UNIFIED=true shopify app generate extension`
@@ -81,11 +94,67 @@
    1. Use `purchase.checkout.payment-method-list.render-before` as the target
      * Update this in `shopify.extension.toml`
    1. Open the extension via Shopify CLI and the Developer Console (`p`).
-      * TODO: Instructions on store password
+      * Click the extension handle in the Dev Console.
+      * The first time you do this, you'll need to enter your store password, and click the link again.
       * Confirm the banner displays above the payment method list
 3. Update the code to fetch the metaobject you created via the Storefront API and use it as a banner message. Display the banner if the payment type is selected.
-   * [Code](../extensions/payment-banner/src/Checkout.jsx)
+
+   ```jsx
+   import {render} from "preact";
+   import {useEffect, useState} from 'preact/hooks';
+   import {useApi, useSelectedPaymentOptions} from "@shopify/ui-extensions/checkout/preact"
+
+   export default function() {
+   render(<Extension />, document.body)
+   }
+
+   function Extension() {
+   const [data, setData] = useState();
+   const {query} = useApi();
+   
+   const paymentMethods = useSelectedPaymentOptions();
+
+   useEffect(() => {
+      query(
+         `query {
+         metaobjects(first: 10, type: "$app:payment_messages") {
+            nodes {
+               id
+               fields {
+               key
+               value
+               }
+            }
+         }
+         }`,
+         {
+         version: "2025-07"
+         }
+      )
+         .then(({data, errors}) => setData(data))
+         .catch(console.error);
+   }, [query]);
+
+   const paymentMessages = data?.metaobjects?.nodes?.map(node => {
+      const message = {
+         id: node.id
+      }
+      node.fields.forEach(field => {
+         message[field.key] = field.value;
+      });
+      return message;
+   });
+
+   const displayMessages = paymentMessages?.filter(message =>
+      paymentMethods.findIndex(paymentMethod => message.payment_type === paymentMethod.type) !== -1
+   );
+
+   return displayMessages?.map(message => <s-banner heading={message.message} id={message.id}></s-banner>) || null;
+   }
+   ```
+
 4. BONUS: Add more payment methods via admin and metaobjects via GraphiQL. Change the payment type for other banners based on values [in `PaymentOption` documentation](https://shopify.dev/docs/api/checkout-ui-extensions/2025-04/apis/payments#useAvailablePaymentOptions-returns)
+   * Suggestion: Add `Bank Deposit` and add a message for `manualPayment`
 
 ## Allow merchants to add their own values
 1. Navigate to your store. Go to Content > Metaobjects, then More Actions > View read-only definitions. Notice the new `payment_messages` content is here. Let's make them editable and more human-friendly.
@@ -107,4 +176,5 @@
    ```
 
 1. Add a metaobject via Admin
-1. Test your new banner in Checkout
+    * Suggestion: Add a `Cash on Delivery (COD)` payment method and define a message for `paymentOnDelivery`.
+1. Test your new message in Checkout

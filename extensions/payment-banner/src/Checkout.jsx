@@ -25,6 +25,9 @@ function Extension() {
           }
         }
       }`,
+      {
+        version: "2025-07"
+      }
     )
       .then(({data, errors}) => setData(data))
       .catch(console.error);
