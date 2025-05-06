@@ -2,11 +2,14 @@
 
 ## Creating your first definition
 
-1. Run `shopify app dev`
+1. Run `shopify app dev --use-localhost`
     * Select the store you just created
 1. Create a `metaobjects.app.payment_messages` metaobject definition in `shopify.app.toml`. Fields:
 
    ```toml
+   [metaobjects.app.payment_messages.access]
+   storefront = "public_read"
+
    [metaobjects.app.payment_messages.fields.payment_type]
    name = "Payment Type"
    type = "single_line_text_field"
@@ -71,6 +74,7 @@
 
 ## Use the metaobject to create a payment banner in Checkout
 1. In a separate terminal (keep `app dev` running), run `POLARIS_UNIFIED=true shopify app generate extension`
+   * Temp internal if you are using `@nightly` CLI: `POLARIS_UNIFIED=true npx @shopify/cli@3.78.2 app generate extension`
    * Select `Checkout UI`
    * Give your extension a name
 1. Create a simple hardcoded banner
@@ -84,7 +88,7 @@
 4. BONUS: Add more payment methods via admin and metaobjects via GraphiQL. Change the payment type for other banners based on values [in `PaymentOption` documentation](https://shopify.dev/docs/api/checkout-ui-extensions/2025-04/apis/payments#useAvailablePaymentOptions-returns)
 
 ## Allow merchants to add their own values
-1. Navigate to your store. Go to Settings > Custom Data, then More Actions > View app-controlled Metaobjects. Notice the new `payment_messages` definition is here too. Let's make them editable and more human-friendly.
+1. Navigate to your store. Go to Content > Metaobjects, then More Actions > View read-only definitions. Notice the new `payment_messages` content is here. Let's make them editable and more human-friendly.
 1. Add `merchant_read_write` to the metaobject definition
 
    ```toml
