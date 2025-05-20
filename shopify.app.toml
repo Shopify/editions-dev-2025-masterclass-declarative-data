@@ -23,11 +23,15 @@ redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
 [metaobjects.app.payment_messages]
 name = "Payment Messages"
 access.storefront = "public_read"
+access.admin = "merchant_read_write"
 
   [metaobjects.app.payment_messages.fields.payment_type]
   name = "Payment Type"
   type = "single_line_text_field"
   required = true
+  validations.choices = [
+    "creditCard", "deferred", "local", "manualPayment", "offsite", "other", "paymentOnDelivery", "redeemable", "wallet", "customOnsite"
+  ]
 
   [metaobjects.app.payment_messages.fields.message]
   name = "Message"
