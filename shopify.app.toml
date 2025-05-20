@@ -48,3 +48,9 @@ access.admin = "merchant_read_write"
 name = "Max Quantity Message"
 type = "single_line_text_field"
 access.admin = "merchant_read_write"
+
+[customer.metafields.app.allow_purchase_over_max]
+name = "Allow Purchase Over Max"
+type = "boolean"
+access.admin = "merchant_read_write"
+access.customer_account = "read"

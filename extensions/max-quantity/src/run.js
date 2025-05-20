@@ -10,6 +10,13 @@
  * @returns {FunctionRunResult}
  */
 export function run(input) {
+  const allowPurchaseOverMax = Boolean(input.cart.buyerIdentity?.customer?.allowPurchaseOverMax?.value) ?? false;
+  if (allowPurchaseOverMax) {
+      return {
+        errors: [],
+      }
+  }
+
   const errors = input.cart.lines
     .flatMap(({ quantity, merchandise }) => {
       if (merchandise.__typename !== "ProductVariant") {

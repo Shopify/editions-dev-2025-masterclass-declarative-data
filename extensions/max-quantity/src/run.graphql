@@ -1,5 +1,12 @@
 query RunInput {
   cart {
+    buyerIdentity {
+      customer {
+        allowPurchaseOverMax: metafield(namespace: "$app", key: "allow_purchase_over_max") {
+          value
+        }
+      }
+    }
     lines {
       quantity
       merchandise {
