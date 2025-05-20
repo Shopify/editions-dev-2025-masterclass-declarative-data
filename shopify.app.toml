@@ -15,7 +15,21 @@ api_version = "2025-07"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = ""
+scopes = "write_metaobject_definitions,write_metaobjects"
 
 [auth]
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+
+[metaobjects.app.payment_messages]
+name = "Payment Messages"
+access.storefront = "public_read"
+
+  [metaobjects.app.payment_messages.fields.payment_type]
+  name = "Payment Type"
+  type = "single_line_text_field"
+  required = true
+
+  [metaobjects.app.payment_messages.fields.message]
+  name = "Message"
+  type = "single_line_text_field"
+  required = true
