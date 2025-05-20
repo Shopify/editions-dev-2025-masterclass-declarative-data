@@ -1,0 +1,18 @@
+api_version = "2025-01"
+
+[[extensions]]
+name = "t:name"
+handle = "max-quantity"
+type = "function"
+uid = "8394e1ab-f498-4ff9-8160-2f24b41e43f9"
+description = "t:description"
+
+  [[extensions.targeting]]
+  target = "purchase.validation.run"
+  input_query = "src/run.graphql"
+  export = "run"
+
+  [extensions.build]
+  command = ""
+  path = "dist/function.wasm"
+

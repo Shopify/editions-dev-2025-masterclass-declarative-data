@@ -1,0 +1,20 @@
+query RunInput {
+  cart {
+    lines {
+      quantity
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          product {
+            maxQuantity: metafield(namespace: "$app", key: "max_purchase_quantity") {
+              value
+            }
+            maxQuantityMessage: metafield(namespace: "$app", key: "max_quantity_message") {
+              value
+            }
+          }
+        }
+      }
+    }
+  }
+}
